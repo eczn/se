@@ -12,7 +12,10 @@
   ],
   "author": "desEczn",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "string.prototype.padend": "^3.0.0",
+    "string.prototype.padstart": "^3.0.0",
     "then-fs": "^2.0.0"
   }
 }

@@ -1,3 +1,6 @@
+const padStart = require('string.prototype.padstart')
+    , padEnd = require('string.prototype.padend')
+
 module.exports = S; 
 
 // DEBUG MODE 
@@ -33,8 +36,8 @@ S.$ = list => new S(list);
 S.prototype.log = function(deep = 0){
     let [ todo, ...args ] = this.list; 
 
-    let before = s => ((s ? 's-exp ': '') +
-            `${deep}:`).padStart(12)+ ' ' + tab(deep); 
+    let before = s => padStart(((s ? 's-exp ': '') +
+            `${deep}:`), 12) + ' ' + tab(deep); 
 
     console.log(before(true) + todo); 
 

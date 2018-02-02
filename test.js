@@ -2,19 +2,20 @@ const fs = require('then-fs')
     , parse = require('./parse')
     , S = require('./S')
     , eval = require('./eval')
+    , padEnd = require('string.prototype.padend')
 
 
 let text = fs.readFileSync('./code.txt').toString(); 
 
 S.DEBUG = true; 
 
-console.time('parse'.padEnd(10))
+console.time(padEnd('parse', 10))
 let ast = parse(text); 
-console.timeEnd('parse'.padEnd(10))
+console.timeEnd(padEnd('parse', 10))
 
-console.time('eval'.padEnd(10))
+console.time(padEnd('eval', 10))
 let val = eval(ast); 
-console.timeEnd('eval'.padEnd(10))
+console.timeEnd(padEnd('eval', 10))
 
-console.log('result'.padEnd(10) + val); 
+console.log(padEnd('result', 9), ':', val); 
 
