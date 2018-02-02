@@ -1,0 +1,17 @@
+{
+  "name": "s-parse",
+  "version": "0.0.1",
+  "description": "s-expression parse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "s-exp"
+  ],
+  "author": "desEczn",
+  "license": "MIT",
+  "dependencies": {
+    "then-fs": "^2.0.0"
+  }
+}
