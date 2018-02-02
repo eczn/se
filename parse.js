@@ -11,6 +11,16 @@ function parse(text){
                     .split(' ')
                     .filter(e => e);
 
+    
+    // 处理值 
+    chars = chars.map(e => {
+        let n = parseInt(e); 
+        if (typeof n === 'number' && !Number.isNaN(n)){
+            return n; 
+        } else {
+            return e; 
+        }
+    })
 
     let { exp } = getExp(chars); 
 
@@ -18,6 +28,8 @@ function parse(text){
     // console.log(chars); 
     
     exp.log(); 
+
+    return exp; 
 }
 
 function getExp(chars){
