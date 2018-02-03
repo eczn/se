@@ -34,16 +34,23 @@ S.$ = list => new S(list);
  * @param { Number  } deep = 0, 深度 
  */
 S.prototype.log = function(deep = 0){
-    let [ todo, ...args ] = this.list; 
+    // let [ todo, ...args ] = this.list; 
 
-    let before = s => padStart(((s ? 's-exp ': '') +
-            `${deep}:`), 12) + ' ' + tab(deep); 
+    let before = s => padStart(
+        ((s ? 's-exp ': '') + `${deep}:`), 
+        12
+    ) + ' ' + tab(deep); 
 
-    console.log(before(true) + todo); 
+    // console.log(before(true) + todo); 
 
-    args.forEach(e => {
+    this.list.forEach((e, idx) => {
         if (e instanceof S){
             e.log(deep + 1); 
+            // if (idx === 0){
+            //     e.log(deep); 
+            // } else {
+            //     e.log(deep + 1); 
+            // }
         } else {
             console.log(before(false) + e); 
         }
