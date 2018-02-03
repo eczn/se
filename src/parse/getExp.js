@@ -12,8 +12,12 @@ function getExp(chars){
             bracket = bracket + 1; 
             if (bracket === 1){
                 // push next 
-                args.push(chars[i + 1]);
-                i = i + 1; 
+                let nextChar = chars[i + 1]; 
+
+                if (nextChar !== '('){
+                    args.push(chars[i + 1]);
+                    i = i + 1; 
+                }
 
             } else if (bracket === 2) {
                 let innerExp = chars.slice(i); 
@@ -43,6 +47,6 @@ function getExp(chars){
 
     return {
         exp: $(args), 
-        len: i
+        len: chars.length
     } 
 }

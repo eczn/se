@@ -1,7 +1,12 @@
 const getExp = require('./getExp')
+    , S = require('../S')
 
 module.exports = parse; 
 
+/**
+ * @description parse 
+ * @param { String } text 
+ */
 function parse(text){
     let chars = text.replace(/\(/g, ' ( ')
                     .replace(/\)/g, ' ) ')
@@ -22,12 +27,33 @@ function parse(text){
         }
     })
 
-    let { exp } = getExp(chars); 
-
-    // console.log(text.trim());
-    // console.log(chars); 
     
-    exp.log(); 
+    let ast_blocks = parseBlock(chars); 
+    
+    ast_blocks.forEach((exp, idx) => {
+        console.log(`第 ${idx + 1} 个块` ); 
+        exp.log(); 
+        console.log('\n'); 
+    })
 
-    return exp; 
+    return ast_blocks; 
+}
+
+/**
+ * @description 处理行 
+ * @param { Array<String> } chars 
+ * @param { Array<S> } blocks 
+ */
+function parseBlock(chars, blocks = []){
+    let { exp, len } = getExp(chars); 
+
+    let nextChars = chars.slice(len + 1); 
+
+    blocks.push(exp); 
+
+    if (nextChars.length === 0){
+        return blocks; 
+    } else {
+        return parseBlock(nextChars, blocks); 
+    }
 }
