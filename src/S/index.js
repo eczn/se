@@ -56,3 +56,11 @@ S.prototype.log = function(deep = 0){
         }
     })
 }
+
+/**
+ * @description S-forEach
+ * @param { Function } fn 
+ */
+S.prototype.forEach = function(fn){
+    this.list.forEach(fn); 
+}
