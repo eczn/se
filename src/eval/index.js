@@ -22,21 +22,26 @@ function eval(ast_blocks, scope = Scope.global_scope){
 
     ast_blocks.forEach(ast => {
         // console.log(ast)
-        evalAst(ast, scope); 
+        one(ast, scope); 
     }); 
 }
 
-function evalAst(ast, scope){
+function one(ast, scope){
     const { list } = ast; 
     let [x, ...xs] = list; 
+
+    console.log(ast); 
 
     if (x === 'define'){
         let [key, binding] = xs; 
         
         scope.define(key, binding); 
+
         return; 
     } else {
 
         // return calc[x].apply(this, xs); 
     }
 }
+
+eval.one = one; 
