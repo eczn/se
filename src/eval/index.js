@@ -56,7 +56,6 @@ function one(ast, scope){
 
         return ast; 
     } else {
-
         let todo = scope.find(x); 
 
         let base_calc = calc[x]; 
@@ -68,9 +67,7 @@ function one(ast, scope){
             let fn_cljr = Clojure.fromExp(todo, scope);
 
             // 定义函数 
-            // scope.define(x ,fn_cljr); 
-
-            
+            scope.define(x ,fn_cljr); 
         } else if (base_calc) {
 
             return base_calc.apply(scope, xs); 
