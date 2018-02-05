@@ -1,5 +1,7 @@
 
 const global_inject = require('./global_inject')
+    , S = require('../S')
+    , Clojure = require('../Clojure')
 
 /**
  * @description 构造函数
@@ -28,7 +30,7 @@ Scope.prototype.extend = function(next_scope = Scope.of()){
 /**
  * @description 查找变量
  * @param { String } key 
- * @returns { * }
+ * @returns { S | Clojure }
  */
 Scope.prototype.find = function(key){
     let { next, vars } = this; 

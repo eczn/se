@@ -64,3 +64,20 @@ S.prototype.log = function(deep = 0){
 S.prototype.forEach = function(fn){
     this.list.forEach(fn); 
 }
+
+/**
+ * @description 第 n 个 
+ * @param { String | Number } n 
+ * @returns { * }
+ */
+S.prototype.at = function(n){
+    return this.list[n]; 
+}
+
+/**
+ * @description 取头部 
+ * @returns { * }
+ */
+S.prototype.first = function(){
+    return this.at(0); 
+}

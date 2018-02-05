@@ -1,5 +1,6 @@
 const getExp = require('./getExp')
     , S = require('../S')
+    // , Clojure = require('../Clojure')
 
 module.exports = parse; 
 
@@ -8,14 +9,26 @@ module.exports = parse;
  * @param { String } text 
  */
 function parse(text){
-    let chars = text.replace(/\(/g, ' ( ')
+    text = text.replace(/\(/g, ' ( ')
                     .replace(/\)/g, ' ) ')
                     .replace(/\n/g, '')
                     .replace(/\r/g, '')
                     .replace(/\t/g, '')
-                    .split(' ')
-                    .filter(e => e);
+                    .split('\n')
+                    .map(line => {
+                        let pos = line.indexOf(';'); 
 
+                        if (~pos){
+                            return line.substring(0, pos)
+                        } else {
+                            return line; 
+                        }
+                    })
+                    .join('\n')
+                    
+
+    let chars = text.split(' ')
+                    .filter(e => e);
     
     // 处理值 
     chars = chars.map(e => {
@@ -34,7 +47,11 @@ function parse(text){
         console.log(`第 ${idx + 1} 个块` ); 
         exp.log(); 
         console.log('\n'); 
-    })
+    }); 
+
+    // ast_blocks = ast_blocks.map(ast => {
+
+    // })
 
     return ast_blocks; 
 }

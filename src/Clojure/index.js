@@ -2,6 +2,8 @@ const S = require('../S')
     , Scope = require('../Scope')
     , eval = require('../eval')
 
+module.exports = Clojure; 
+
 /**
  * @description 构造闭包 
  * @param { S } fn_exp 
@@ -12,6 +14,20 @@ function Clojure(fn_exp, fn_type_args, scope){
     this.fn_exp       =    fn_exp; 
     this.fn_type_args =    fn_type_args; 
     this.scope        =    scope; 
+}
+
+/**
+ * @description 从 S-Exp 中构造闭包 
+ * @param { S } lambda_exp
+ * @param { Scope } scope 
+ */
+Clojure.fromExp = function(lambda_exp, scope){
+    // 解构 
+    let [ , fn_type_args, fn_exp] = lambda_exp.list; 
+
+    console.log(lambda_exp.list)
+
+    return new Clojure(fn_exp, fn_type_args, scope); 
 }
 
 /**
