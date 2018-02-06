@@ -31,14 +31,14 @@ function parse(text){
                     .filter(e => e);
     
     // 处理值 
-    chars = chars.map(e => {
-        let n = parseInt(e); 
-        if (typeof n === 'number' && !Number.isNaN(n)){
-            return n; 
-        } else {
-            return e; 
-        }
-    })
+    // chars = chars.map(e => {
+    //     let n = parseInt(e); 
+    //     if (typeof n === 'number' && !Number.isNaN(n)){
+    //         return n; 
+    //     } else {
+    //         return e; 
+    //     }
+    // })
 
     
     let ast_blocks = parseBlock(chars); 
