@@ -1,5 +1,6 @@
 const padStart = require('string.prototype.padstart')
     , padEnd = require('string.prototype.padend')
+    , Clojure = require('../Clojure')
 
 module.exports = S; 
 
@@ -19,6 +20,28 @@ let tab = deep => '    '.repeat(deep);
  * @param { Array } list 
  */
 function S(list){
+    
+    // 类型 
+    list = list.map(item => {
+        if (item instanceof S){
+            return item; 
+        } else {
+            let n = parseInt(item); 
+
+            if (!Number.isNaN(n) && typeof n === 'number'){
+                return n; 
+            } else if (typeof item === 'string'){
+                if (item === 'true') {
+                    return true;
+                } else if (item === 'false') {
+                    return false;
+                } else {
+                    return item; 
+                }
+            }
+        }
+    }); 
+
     this.list = list;
 }
 
@@ -52,7 +75,7 @@ S.prototype.log = function(deep = 0){
             //     e.log(deep + 1); 
             // }
         } else {
-            console.log(before(false) + e); 
+            console.log(before(false) + e + ':' + typeof e); 
         }
     })
 }

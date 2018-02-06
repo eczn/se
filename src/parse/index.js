@@ -41,6 +41,8 @@ function parse(text){
     // })
 
     
+
+    
     let ast_blocks = parseBlock(chars); 
     
     ast_blocks.forEach((exp, idx) => {
