@@ -1,8 +1,0 @@
-(define add
-    (lambda (x) (lambda (y) (+ x y))))
-
-((add 1) 1)
-
-;; 求值结果为 3 
-
-

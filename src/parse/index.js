@@ -30,30 +30,13 @@ function parse(text){
     let chars = text.split(' ')
                     .filter(e => e);
     
-    // 处理值 
-    // chars = chars.map(e => {
-    //     let n = parseInt(e); 
-    //     if (typeof n === 'number' && !Number.isNaN(n)){
-    //         return n; 
-    //     } else {
-    //         return e; 
-    //     }
-    // })
-
-    
-
-    
     let ast_blocks = parseBlock(chars); 
     
     ast_blocks.forEach((exp, idx) => {
-        console.log(`第 ${idx + 1} 个块` ); 
+        S.DEBUG && console.log(`第 ${idx + 1} 个块` ); 
         exp.log(); 
-        console.log('\n'); 
+        S.DEBUG && console.log('\n'); 
     }); 
-
-    // ast_blocks = ast_blocks.map(ast => {
-
-    // })
 
     return ast_blocks; 
 }

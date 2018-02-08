@@ -8,7 +8,7 @@ const fs = require('then-fs')
 
 let text = fs.readFileSync('./code.txt').toString(); 
 
-S.DEBUG = true; 
+// S.DEBUG = true; 
 
 console.time(padStart('parse  ', 11))
 let ast = parse(text); 

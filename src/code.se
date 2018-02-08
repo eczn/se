@@ -1,0 +1,8 @@
+(define add3
+    (lambda (x)
+        (lambda (y) 
+            (lambda (z) (+ x y z)))))
+
+(((add3 1) 1) 1)
+
+;; 求值结果为 2
