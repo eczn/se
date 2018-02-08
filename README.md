@@ -29,14 +29,17 @@ $ npm i
 随后编辑 `./src/code.se` :
 
 ``` scheme 
-(define add_xyz
-    (lambda (x)
-        (lambda (y) 
-            (lambda (z) (+ x y z)))))
+(define sum
+    (lambda (n) 
+        (? (> n 0) 
+            (+ n (sum (- n 1)))
+            0)))
 
-(((add_xyz 1) 1) 1)
+;; 5 + 4 + 3 + 2 + 1 + 0
+(define sum_of_1_to_5 (sum 5))
 
-;; 求值结果为 3
+;; => 15 
+(log sum_of_1_to_5)
 ```
 
 然后解释运行： 
@@ -48,31 +51,16 @@ node ./src/test
 输出： 
 
 ``` bash
-第 1 个块
-          0: define:string
-          0: add_xyz:string
-          1:     lambda:string
-          2:         x:string
-          2:         lambda:string
-          3:             y:string
-          3:             lambda:string
-          4:                 z:string
-          4:                 +:string
-          4:                 x:string
-          4:                 y:string
-          4:                 z:string
+    parse  : 1.312ms
+- SE Log Start ---------------- 
 
 
-第 2 个块
-          2:         add_xyz:string
-          2:         1:number
-          1:     1:number
-          0: 1:number
+15
 
 
-    parse  : 8.690ms
-     eval  : 1.302ms
-   result  : [ undefined, 3 ]
+- SE Log End ------------------
+     eval  : 2.744ms
+   result  : [ undefined, undefined, undefined ]
 
 ```
 
