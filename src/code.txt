@@ -1,9 +1,8 @@
-(define add 
-    (lambda (x y) (+ x y 1)))
+(define add
+    (lambda (x y) (+ x y)))
 
-(add 1 2)
+(add 1 (add 2 3))
 
-(add false true)
 ;; 求值结果为 3 
 
 

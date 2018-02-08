@@ -1,6 +1,6 @@
 const padStart = require('string.prototype.padstart')
     , padEnd = require('string.prototype.padend')
-    , Clojure = require('../Clojure')
+    // , Clojure = require('../Clojure')
 
 module.exports = S; 
 
@@ -22,7 +22,7 @@ let tab = deep => '    '.repeat(deep);
 function S(list){
     
     // 类型 
-    list = list.map(item => {
+    this.list = list.map(item => {
         if (item instanceof S){
             return item; 
         } else {
@@ -41,8 +41,6 @@ function S(list){
             }
         }
     }); 
-
-    this.list = list;
 }
 
 /**

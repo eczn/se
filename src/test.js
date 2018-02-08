@@ -14,11 +14,11 @@ console.time(padStart('parse  ', 11))
 let ast = parse(text); 
 console.timeEnd(padStart('parse  ', 11))
 
-// console.time(padStart('eval  ', 11))
-// let val = eval(ast); 
-// console.timeEnd(padStart('eval  ', 11))
+console.time(padStart('eval  ', 11))
+let val = eval(ast); 
+console.timeEnd(padStart('eval  ', 11))
 
-// console.log(padStart('result ', 10), ':', val); 
+console.log(padStart('result ', 10), ':', val); 
 
 
 
