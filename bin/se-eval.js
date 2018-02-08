@@ -20,6 +20,13 @@ function seEval(...args){
 
     if (mode_config.debug) S.DEBUG = true; 
 
+
+    if (S.DEBUG) {
+        console.log('SE Code: '); 
+        console.log(text); 
+        console.log('\n'); 
+    }
+
     console.time(padStart('parse  ', 11))
     let ast = parse(text); 
     console.timeEnd(padStart('parse  ', 11))
