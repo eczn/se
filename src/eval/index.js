@@ -60,7 +60,14 @@ function one(ast, scope){
                 return base_calc.apply(scope, cbv); 
             } else {
                 // func 
-                let func = scope.find(x); 
+                let x_type = typer(x); 
+                let func; 
+
+                if (x_type === 'S'){
+                    func = one(x, scope); 
+                } else {
+                    func = scope.find(x); 
+                }
 
                 let cbv = xs.map(item => one(item, scope)); 
 
