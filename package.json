@@ -1,5 +1,8 @@
 {
-  "name": "se",
+  "name": "se-lang",
+  "bin": {
+    "se-lang": "bin/cli.js"
+  },
   "version": "0.0.9",
   "description": "s-expression parse, eval",
   "main": "index.js",
@@ -12,10 +15,10 @@
   ],
   "author": "desEczn",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "string.prototype.padend": "^3.0.0",
     "string.prototype.padstart": "^3.0.0",
     "then-fs": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -23,8 +23,18 @@ e... 有点闲了，写一下看看，看看能写到哪里
 ``` bash 
 $ git clone https://github.com/eczn/se.git 
 $ cd se 
-$ npm i
+$ npm i 
+# 如果想要命令行工具的话 
+$ npm link 
 ```
+
+关于命令行用法： 
+
+``` bash
+$ se-lang [--debug] [file]
+```
+
+# Write & Run 
 
 随后编辑 `./src/code.se` :
 
@@ -45,7 +55,10 @@ $ npm i
 然后解释运行： 
 
 ``` bash
-node ./src/test
+# 用 node 执行 test.js 
+$ node ./src/test
+# 或者使用命令行  
+$ se-lang ./src/code.se 
 ```
 
 输出： 
