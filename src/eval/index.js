@@ -8,7 +8,7 @@ let calc = {
 
         return args.reduce((acc, cur) => {
             return acc + cur;
-        }, 0)
+        })
     }, 
     '-': (...args) => args.reduce((acc, cur) => acc - cur), 
     'log': (...args) => console.log.apply(console, args)
@@ -79,7 +79,11 @@ function one(ast, scope){
         if (ast_type === 'var'){
             return scope.find(ast, scope); 
         } else {
-            return ast;             
+            if (ast_type === 'string'){
+                return ast.substring(1); 
+            } else {
+                return ast;
+            }
         }
     }
 }

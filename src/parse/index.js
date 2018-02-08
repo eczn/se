@@ -9,23 +9,23 @@ module.exports = parse;
  * @param { String } text 
  */
 function parse(text){
-    text = text.replace(/\(/g, ' ( ')
-                    .replace(/\)/g, ' ) ')
-                    .replace(/\n/g, '')
-                    .replace(/\r/g, '')
-                    .replace(/\t/g, '')
-                    .split('\n')
-                    .map(line => {
-                        let pos = line.indexOf(';'); 
+    text = text.split('\n')
+        .map(line => {
+            let pos = line.indexOf(';'); 
+    
+            if (pos !== -1){
+                return line.substring(0, pos)
+            } else {
+                return line; 
+            }
+        })
+        .join('\n')
+        .replace(/\(/g, ' ( ')
+        .replace(/\)/g, ' ) ')
+        .replace(/\n/g, '')
+        .replace(/\r/g, '')
+        .replace(/\t/g, '')
 
-                        if (~pos){
-                            return line.substring(0, pos)
-                        } else {
-                            return line; 
-                        }
-                    })
-                    .join('\n')
-                    
 
     let chars = text.split(' ')
                     .filter(e => e);

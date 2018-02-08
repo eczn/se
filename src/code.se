@@ -1,8 +1,16 @@
-(define add_xyz
-    (lambda (x)
+(define add_xyz 
+    (lambda (x) 
         (lambda (y) 
             (lambda (z) (+ x y z)))))
 
-(((add_xyz 1) 1) 1)
+(define add_xyc 
+    (add_xyz 'c))
 
-;; 求值结果为 3
+(define add_xbc 
+    (add_xyc 'b))
+
+;; cba
+(add_xbc 'a)
+
+;; abc 
+(((add_xyz 'a) 'b) 'c)
