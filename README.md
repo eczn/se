@@ -52,6 +52,20 @@ $ se-lang [--debug] [file]
 (log sum_of_1_to_5)
 ```
 
+这段程序与如下的 js 等价： 
+
+``` js
+let sum = n => (
+    (n > 0) ? 
+        n + sum(n - 1) : 
+        0
+); 
+
+let sum_of_1_to_5 = sum(5); 
+
+console.log(sum_of_1_to_5); 
+```
+
 然后解释运行： 
 
 ``` bash
