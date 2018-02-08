@@ -1,16 +1,12 @@
-(define add_xyz 
-    (lambda (x) 
-        (lambda (y) 
-            (lambda (z) (+ x y z)))))
+(define sum
+    (lambda (n) 
+        (? (> n 0) 
+            (+ n (sum (- n 1)))
+            0)))
 
-(define add_xyc 
-    (add_xyz 'c))
+;; 5 + 4 + 3 + 2 + 1 + 0
+(define sum_of_1_to_5 (sum 5))
 
-(define add_xbc 
-    (add_xyc 'b))
+;; => 15 
+(log sum_of_1_to_5)
 
-;; cba
-(add_xbc 'a)
-
-;; abc 
-(((add_xyz 'a) 'b) 'c)

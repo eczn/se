@@ -1,6 +1,6 @@
 {
   "name": "se",
-  "version": "0.0.2",
+  "version": "0.0.9",
   "description": "s-expression parse, eval",
   "main": "index.js",
   "scripts": {
