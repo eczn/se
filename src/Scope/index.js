@@ -19,7 +19,8 @@ Scope.of = () => new Scope();
 
 /**
  * @description 变长 
- * @param { Scope } next_scope 
+ * @param   { Scope } next_scope 
+ * @returns { Scope }
  */
 Scope.prototype.extend = function(next_scope = Scope.of()){
     next_scope.next = this; 
@@ -55,6 +56,21 @@ Scope.prototype.define = function(key, binding){
     vars[key] = binding; 
 
     return this; 
+}
+
+/**
+ * @description get scope length 
+ * @returns { Number } length 
+ */
+Scope.prototype.getLength = function(){
+    let i = 0, scope = this; 
+
+    while (scope){
+        scope = scope.next; 
+        i = i + 1; 
+    }
+
+    return i; 
 }
 
 // global_scope
