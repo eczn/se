@@ -11,7 +11,13 @@ let calc = {
         })
     }, 
     '-': (...args) => args.reduce((acc, cur) => acc - cur), 
-    'log': (...args) => console.log.apply(console, args)
+    'log': (...args) => console.log.apply(console, args),
+    '>': (l, r) => l > r, 
+    '<': (l, r) => l < r,
+    '>=': (l, r) => l >= r, 
+    '<=': (l, r) => l <= r,
+    // 需要进一步操作 
+    '?': true
 }
 
 /**
@@ -55,9 +61,15 @@ function one(ast, scope){
             let base_calc = calc[x]; 
 
             if (base_calc){
-                let cbv = xs.map(item => one(item, scope)); 
+                if (x === '?'){
+                    let [con, l, r] = xs; 
+                    let todo = one(con, scope) ? l : r; 
 
-                return base_calc.apply(scope, cbv); 
+                    return one(todo, scope); 
+                } else {
+                    let cbv = xs.map(item => one(item, scope)); 
+                    return base_calc.apply(scope, cbv); 
+                }
             } else {
                 // func 
                 let x_type = typer(x); 
@@ -74,7 +86,6 @@ function one(ast, scope){
                 return func.invoke(cbv); 
             }
         }
-
     } else {
         if (ast_type === 'var'){
             return scope.find(ast, scope); 
