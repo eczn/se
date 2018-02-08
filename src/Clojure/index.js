@@ -25,7 +25,7 @@ Clojure.fromExp = function(lambda_exp, scope){
     // 解构 
     let [ , fn_type_args, fn_exp] = lambda_exp.list; 
 
-    S.DEBUG && console.log(lambda_exp.list)
+    // S.DEBUG && console.log(lambda_exp.list)
 
     return new Clojure(fn_exp, fn_type_args, scope); 
 }

@@ -1,8 +1,8 @@
-(define add3
+(define add_xyz
     (lambda (x)
         (lambda (y) 
             (lambda (z) (+ x y z)))))
 
-(((add3 1) 1) 1)
+(((add_xyz 1) 1) 1)
 
-;; 求值结果为 2
+;; 求值结果为 3

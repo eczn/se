@@ -6,9 +6,9 @@ const fs = require('then-fs')
     , padStart = require('string.prototype.padStart')
 
 
-let text = fs.readFileSync('./code.txt').toString(); 
+let text = fs.readFileSync('./code.se').toString(); 
 
-// S.DEBUG = true; 
+S.DEBUG = true; 
 
 console.time(padStart('parse  ', 11))
 let ast = parse(text); 
