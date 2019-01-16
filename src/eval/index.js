@@ -83,6 +83,7 @@ function one(ast, scope){
 
                 let cbv = xs.map(item => one(item, scope)); 
 
+                // console.log('!!!', func)
                 return func.invoke(cbv); 
             }
         }

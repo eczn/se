@@ -14,8 +14,8 @@ e... 有点闲了，写一下看看，看看能写到哪里
 3. [x] define 函数声明 (First Class Function)
 4. [x] lambda 函数调用 (Call-By-Value, CBV)
 5. [x] if 语句分支     
-6. [x] lambda 递归调用 
-7. [ ] 元组类型
+6. [x] lambda 递归调用 2333 这个实现了，其他的数据结构的实现也差不多了 2333 比如 pair
+7. <s>[ ] 元组类型</s>
 
 
 # Usage 
@@ -89,5 +89,46 @@ $ se-lang ./src/code.se
      eval  : 2.744ms
    result  : [ undefined, undefined, undefined ]
 
+```
+
+
+# SE Syntax 
+
+SE 的实现参考了 Scheme 的语法（本人也不是很懂 scheme）。。。 
+
+目前实现了一部分，，自己玩玩学学。 
+
+# 使用 Pair 
+
+函数式语言里的数据结构可以用 Church Encoding 来实现
+
+``` scheme
+;; 定义数据结构 pair 
+(define cons
+    (lambda (x y)
+        (lambda (m)
+            (m x y))))
+
+;；取出 pair 的左边
+(define car
+    (lambda (pair) 
+        (pair (lambda (l r) l))))
+
+;; 取出 pair 的右边
+(define cdr
+    (lambda (pair)
+        (pair (lambda (l r) r))))
+
+;; 定义 xy 
+(define xy (cons 1 2))
+
+(log xy)
+;; (1 . 2)
+
+(log (car xy))
+;; => 1
+
+(log (cdr xy))
+;; => 2
 ```
 

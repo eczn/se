@@ -59,7 +59,7 @@ S.prototype.log = function(deep = 0){
 
     let before = s => padStart(
         ((s ? 's-exp ': '') + `${deep}:`), 
-        12
+        4
     ) + ' ' + tab(deep); 
 
     // console.log(before(true) + todo); 

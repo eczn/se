@@ -30,16 +30,14 @@ function seEval(...args){
     console.time(padStart('parse  ', 11))
     let ast = parse(text); 
     console.timeEnd(padStart('parse  ', 11))
-    console.log('parse ok'); 
+    console.log('Parse ok:'); 
 
 
-    console.log('\n'); 
-    console.log('- SE Log Start ----------------', '\n\n'); 
+    console.log('- SE Start ----------------'); 
     console.time(padStart('eval  ', 11))
     let val = eval(ast); 
 
-    console.log('\n'); 
-    console.log('- SE Log End ------------------'); 
+    console.log('- SE End ------------------'); 
     console.timeEnd(padStart('eval  ', 11))
 
     console.log(padStart('result ', 10), ':', val); 
