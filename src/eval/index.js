@@ -1,6 +1,8 @@
 const Scope = require('../Scope')
     , S = require('../S')
     , Clojure = require('../Clojure')
+    , global_inject = require('../Scope/global_inject')
+    , parse = require('../parse')
 
 let calc = {
     '+': function(...args){
@@ -26,6 +28,10 @@ let calc = {
  * @param { Scope    }  scope 
  */
 function eval(ast_blocks, scope = Scope.global_scope){
+    if (!scope.find('__INJECTED__')){
+        // 需要注入代码
+        global_inject(parse, eval, scope); 
+    }
 
     return ast_blocks.map(ast => {
         // console.log(ast)

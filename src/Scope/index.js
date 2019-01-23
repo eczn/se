@@ -1,6 +1,4 @@
-
-const global_inject = require('./global_inject')
-    , S = require('../S')
+const S = require('../S')
     , Clojure = require('../Clojure')
 
 /**
@@ -74,6 +72,6 @@ Scope.prototype.getLength = function(){
 }
 
 // global_scope
-Scope.global_scope = global_inject(new Scope()); 
+Scope.global_scope = new Scope(); 
 
 module.exports = Scope; 

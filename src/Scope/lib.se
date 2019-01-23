@@ -1,0 +1,18 @@
+;; 定义数据结构 pair 
+(define cons
+    (lambda (x y)
+        (lambda (m)
+            (m x y))))
+
+;；取出 pair 的左边
+(define car
+    (lambda (pair) 
+        (pair (lambda (l r) l))))
+
+;; 取出 pair 的右边
+(define cdr
+    (lambda (pair)
+        (pair (lambda (l r) r))))
+;; 
+
+

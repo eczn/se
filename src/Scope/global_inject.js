@@ -1,11 +1,20 @@
 // const Scope = require('./index')
-const Clojure = require('../Clojure'); 
+const fs = require('fs'); 
+const path = require('path');
+const S = require('../S')
 
-module.exports = function global_inject(scope){
+const lib = fs.readFileSync(path.join(__dirname, './lib.se'), 'utf-8'); 
+
+module.exports = function global_inject(parse, eval, scope){
+    const pre = S.DEBUG; 
+    S.DEBUG = false; 
+    scope.define('__INJECTED__', true); 
+    S.DEBUG = pre; 
+
+    eval(parse(lib), scope); 
+
     scope.define('PI', Math.PI); 
-    scope.define('cons', function(l, r) {
-        console.log('shit', l, r); 
-    })
+
     return scope; 
 }; 
 
