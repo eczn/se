@@ -24,6 +24,7 @@ e... 有点闲了，写一下看看，看看能写到哪里
 $ git clone https://github.com/eczn/se.git 
 $ cd se 
 $ npm i 
+$ tsc
 # 命令行工具
 $ npm link 
 ```
