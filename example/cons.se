@@ -15,13 +15,17 @@
         (pair (lambda (l r) r))))
 
 ;; 定义 xy 
-(define xy (cons 1 2))
+(define xy1 (cons 1 2))
+(define xy2 (cons 3 4))
 
-(log xy)
 ;; (1 . 2)
 
-(log (car xy))
+(car xy1)
 ;; => 1
-
-(log (cdr xy))
+(cdr xy1)
 ;; => 2
+(car xy2)
+;; => 3
+(cdr xy2)
+;; => 4
+
