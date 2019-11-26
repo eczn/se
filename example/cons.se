@@ -13,6 +13,15 @@
 (define cdr
     (lambda (pair)
         (pair (lambda (l r) r))))
-;; 
 
+;; 定义 xy 
+(define xy (cons 1 2))
 
+(log xy)
+;; (1 . 2)
+
+(log (car xy))
+;; => 1
+
+(log (cdr xy))
+;; => 2

@@ -1,0 +1,39 @@
+
+;; 求和 0 ~ n
+; (define (sum n)
+;     (? (> n 0)
+;         (+ n (sum (- n 1)))
+;         0))
+
+; (sum 5)
+
+
+;; 求平方
+;; square(n) = n * n
+(define (square n)
+    (* n n))
+
+;; 判断 n 是不是偶数 
+(define (even? n)
+    (= (remainder n 2) 0))
+
+;; 求幂的迭代器
+(define (fast-expt-iter a b n)
+    (if (= 0 n)
+        ;; 如果 n 到 0 返回 a
+        a
+        ;; 否则判断 n 是不是偶数 
+        (if (even? n)
+            ;; 是偶数的话，根据 (a^(n / 2)) ^ 2 = (b ^ 2)^(n / 2) 来迭代
+            (fast-expt-iter
+                a (square b) (/ n 2))
+            ;; 否则化成偶数来处理 ^_^
+            (fast-expt-iter
+                (* a b) b (- n 1)))))
+
+;; 包装一下迭代器
+(define (fast-expt b n)
+    (fast-expt-iter 1 b n))
+
+;; 3^3 = 27
+(fast-expt 3 3)
