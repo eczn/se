@@ -1,6 +1,6 @@
 import { Scope } from "./index";
 
-import { ScopeVAR } from '../runtime';
+import { ScopeVAR, runner } from '../runtime';
 
 
 export const global_scope = new Scope<ScopeVAR>();
@@ -100,3 +100,7 @@ global_scope.set('log', (runner, $, restRawExp) => {
     console.log('RUNTIME_LOGGER:', R);
     return R;
 })
+
+// global_scope.set('require', (runner, $, restRawExp) => {
+
+// });
