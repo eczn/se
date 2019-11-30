@@ -65,6 +65,8 @@ here: [example](./example)
 ## point args & apply args
 
 ``` scheme
+(load "lib/main.se")
+
 (define (add-all a . b)
     (if (null? a)
         0
@@ -78,6 +80,8 @@ here: [example](./example)
 ## cons
 
 ``` scheme
+(load "lib/main.se")
+
 (define pair
     (cons 1 2))
 
@@ -88,6 +92,8 @@ here: [example](./example)
 ## list
 
 ``` scheme
+(load "lib/main.se")
+
 (define (double x)
     (+ x x))
 
