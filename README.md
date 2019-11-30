@@ -23,6 +23,11 @@ cli usage:
 $ se <file>
 ```
 
+# Example
+
+here: [example](./example)
+
+
 # Syntax
 
 ## define 
@@ -106,10 +111,6 @@ $ se <file>
 5. [x] if statement control stream
 6. [x] variable length parameter
 7. [x] cons & list
-
-# Example
-
-参见 [example](./example)
 
 # License
 
