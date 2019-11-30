@@ -1,2 +1,83 @@
-(define (null? x) (= x null))
+;; abs
+(define (abs x)
+    (if (> x 0)
+        x
+        (- 0 x)))
 
+;; 平均数
+(define (average a b) (/ (+ a b) 2))
+
+
+;; 判断 x 是不是 null
+(define (null? x)
+    (= x null))
+
+;; 求平方 square(n) = n * n
+(define (square n)
+    (* n n))
+
+;; 判断 n 是不是偶数 
+(define (even? n)
+    (= (remainder n 2) 0))
+
+
+;; 快速求幂 fast-expt(b, n) = b ^ n
+(define (fast-expt b n)
+    ;; 求幂的迭代器
+    (define (fast-expt-iter a b n)
+        (if (= 0 n)
+            ;; 如果 n 到 0 返回 a
+            a
+            ;; 否则判断 n 是不是偶数 
+            (if (even? n)
+                ;; 是偶数的话，根据 (a^(n / 2)) ^ 2 = (b ^ 2)^(n / 2) 来迭代
+                (fast-expt-iter
+                    a (square b) (/ n 2))
+                ;; 否则化成偶数来处理 ^_^
+                (fast-expt-iter
+                    (* a b) b (- n 1)))))
+    ;; 从初始状态开始迭代
+    (fast-expt-iter 1 b n))
+
+;; 逼近
+(define (fixed-point f first-guess)
+    ;; 误差
+    (define TOLERANCE 0.00001)
+    ;; 足够近
+    (define (close-enough? v1 v2)
+        (< (abs (- v1 v2)) TOLERANCE))
+    ;; 猜一次
+    (define (try guess)
+        ;; 下一个
+        (define next (f guess))
+        (if (close-enough? guess next)
+            next
+            (try next)))
+    ;; 开始猜
+    (try first-guess))
+
+;; 求平方根
+(define (sqrt x)
+    ;; 转换
+    (define (f y) (average y (/ x y)))
+    ;; 求值
+    (fixed-point f 1))
+
+;; 将函数 f g 组合起来
+(define (compose f g)
+    (lambda (x)
+        (f (g x))))
+
+;; 将函数 f 重复调用 n 次
+(define (repeated f n)
+    (if (= n 1)
+        f
+        (compose f (repeated f (- n 1)))))
+
+
+;; 给 x 开 n 次根
+(define (nth-root x n)
+    (define (average-damp f)
+        (lambda (x) (average x (f x))))
+    (fixed-point ((repeated average-damp (- n 1)) (lambda (y) (/ x (fast-expt y (- n 1)))))
+        1.0))

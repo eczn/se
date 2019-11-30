@@ -13,10 +13,20 @@ global_scope.set('+', (runner, $, restExp) => {
     return temp.reduce((a, b) => a + b);
 })
 
+global_scope.set('*', (runner, $, restExp) => {
+    const temp = restExp.map(e => runner(e, $));
+    return temp.reduce((a, b) => a * b);
+})
+
 global_scope.set('-', (runner, $, restExp) => {
     const temp = restExp.map(e => runner(e, $));
     return temp.reduce((a, b) => a - b);
 }) 
+
+global_scope.set('/', (runner, $, restExp) => {
+    const temp = restExp.map(e => runner(e, $));
+    return temp.reduce((a, b) => a / b);
+})
 
 global_scope.set('inc', (runner, $, restExp) => {
     return runner(restExp[0], $) + 1;
@@ -27,11 +37,18 @@ global_scope.set('log', (runner, $, restExp) => {
     return 0;
 });
 
-global_scope.set('>', (runner, $, restExp) => {
-    // (> L R)
-    const [L, R] = restExp;
+global_scope.set('sin', (runner, $, restExp) => {
+    return Math.sin(runner(restExp[0], $));
+})
 
+global_scope.set('>', (runner, $, restExp) => {
+    const [L, R] = restExp;
     return runner(L, $) > runner(R, $) ? 1 : 0;
+}); 
+
+global_scope.set('<', (runner, $, restExp) => {
+    const [L, R] = restExp;
+    return runner(L, $) < runner(R, $) ? 1 : 0;
 }); 
 
 global_scope.set('=', (runner, $, restExp) => {
@@ -41,20 +58,25 @@ global_scope.set('=', (runner, $, restExp) => {
     return runner(L, $) === runner(R, $) ? 1 : 0;
 }); 
 
+global_scope.set('remainder', (runner, $, restExp) => {
+    const [v] = restExp;
+    return runner(v, $) % 2;
+});
+
 global_scope.set('define', (runner, $, restExp) => {
     // (define var (EXP))
     // (define (fnName, args) (BODY))
-    const [defineVar, defineExp] = restExp;
+    const [defineVar, ...defineExps] = restExp;
 
     if (typeof defineVar === 'string') {
-        $.set(defineVar, runner(defineExp, $))
+        $.set(defineVar, runner(defineExps[0], $))
         return 0;
     } else {
         const [fnName, ...args] = defineVar;
 
         if (typeof fnName !== 'string') throw new Error('define 的函数名不能是表达式 ' + fnName);
 
-        $.set(fnName, runner(['lambda', args, defineExp], $))
+        $.set(fnName, runner(['lambda', args, ...defineExps], $))
 
         return 0;
     }
@@ -76,10 +98,11 @@ global_scope.set('if', (runner, $, restExp) => {
 global_scope.set('lambda', (runner, $, restExp) => {
     // $ 函数声明所在的作用域
 
-    // (lambda (x y) (+ x y))
-    const [varNames, body] = restExp;
+    // (lambda (x y) (+ x y) ... )
+    const [varNames, ...bodies] = restExp;
 
-    if (typeof varNames === 'string') throw new Error('lambda 函数定义错误:' + varNames)
+    if (typeof varNames === 'string') throw new Error('lambda 函数定义错误:' + restExp);
+    if (bodies.length === 0) throw new Error('找不到 lambda 函数体 ' + restExp)
 
     // 下面返回的函数的类型跟 BuildInFunction 是一样的
     // 也就是说，lambda 这个函数本身返回一个函数
@@ -113,7 +136,9 @@ global_scope.set('lambda', (runner, $, restExp) => {
             }
         }
 
-        return runner(body, $$);
+        // return runner(body, $$);
+        const tmps = bodies.map(body => runner(body, $$));
+        return tmps[tmps.length - 1];
     };
 });
 

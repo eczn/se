@@ -1,15 +1,14 @@
+;; cons
 (define (cons x y)
     (lambda (m)
         (m x y)))
 
-(define (get-left  l r) l)
-
-(define (get-right l r) r)
-
-;；取出 pair 的左边
+;; car
 (define (car pair)
+    (define (get-left  l r) l)
     (pair get-left))
 
-;; 取出 pair 的右边
+;; cdr
 (define (cdr pair)
+    (define (get-right l r) r)
     (pair get-right))
