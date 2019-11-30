@@ -40,6 +40,9 @@ $ se <file>
 ``` scheme
 (define (double x)
     (+ x x))
+
+(define double-2
+    (lambda (x) (+ x x)))
 ```
 
 ## recurse
