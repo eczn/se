@@ -10,7 +10,7 @@ export function runAll(rawExps: RawExp) {
         // console.log('\n');
     });
 
-    console.log('\n\n\n\n\n 每个代码块的结果：', all);
+    console.log('\n\n每个代码块的结果：', all);
 }
 
 function runner(rawExp: string | RawExp, $: Scope): ScopeVar {

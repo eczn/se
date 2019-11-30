@@ -1,0 +1,9 @@
+(log "开始加载base-lib")
+
+(load "lib/util.se")
+
+(load "lib/cons.se")
+
+(load "lib/list.se")
+
+(log "base-lib加载完毕")

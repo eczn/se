@@ -1,0 +1,24 @@
+(define (list a . b)
+    (if (null? a)
+        null
+        (cons a (apply list b))))
+
+(define (run-lr l r) r)
+
+(define (for-each fn list)   
+    (if (null? list)
+        null
+        (run-lr (fn (car list))
+            (for-each fn (cdr list)))))
+
+(define (map fn list)
+    (if (null? list)
+        null
+        (cons
+            (fn (car list))
+            (map fn (cdr list)))))
+
+(define (list-ref items n)
+    (if (= n 0)
+        (car items)
+        (list-ref (cdr items) (- n 1))))

@@ -1,0 +1,17 @@
+(load "./lib/main.se")
+
+;; 定义 xy 
+(define xy1 (cons 1 2))
+(define xy2 (cons 3 4))
+
+;; (1 . 2)
+
+(car xy1)
+;; => 1
+(cdr xy1)
+;; => 2
+(car xy2)
+;; => 3
+(cdr xy2)
+;; => 4
+

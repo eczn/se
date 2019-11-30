@@ -1,0 +1,15 @@
+(define (cons x y)
+    (lambda (m)
+        (m x y)))
+
+(define (get-left  l r) l)
+
+(define (get-right l r) r)
+
+;；取出 pair 的左边
+(define (car pair)
+    (pair get-left))
+
+;; 取出 pair 的右边
+(define (cdr pair)
+    (pair get-right))

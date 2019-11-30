@@ -1,22 +1,9 @@
 
-> lisp 方言解释器 
+> lisp dialect: se
 
 # SE 
 
-才刚刚写
-
-# Todos 
-
-e... 有点闲了，写一下看看，看看能写到哪里
-
-1. [x] S 表达式的解析  
-2. [x] define 变量声明 (静态作用域)
-3. [x] define 函数声明 (First Class Function)
-4. [x] lambda 函数调用 (Call-By-Value, CBV)
-5. [x] if 语句分支
-6. [x] lambda 递归调用 2333 这个实现了，其他的数据结构的实现也差不多了 2333 比如 pair
-7. [x] lambda 闭包
-
+the implementation of se inspired from `Scheme`
 
 # Usage 
 
@@ -25,21 +12,97 @@ $ git clone https://github.com/eczn/se.git
 $ cd se 
 $ npm i 
 $ tsc
-# 命令行工具
-$ npm link 
+# cli tool
+$ npm link
+$ se ./example/play.se
 ```
 
-关于命令行用法： 
+cli usage: 
 
 ``` bash
 $ se <file>
 ```
 
-# SE Syntax 
+# Syntax
 
-SE 的实现参考了 Scheme 的语法（本人也不是很懂 scheme）。。。 
+## define 
 
-目前实现了一部分，，自己玩玩学学。 
+``` scheme
+(define var
+    (+ 1 1))
+
+(define (add x y)
+    (+ x y))
+```
+
+## lambda
+
+``` scheme
+(define (double x)
+    (+ x x))
+```
+
+## recurse
+
+``` scheme
+(define (sum n)
+    (if (> n 0)
+        (+ n (sum (- n 1)))
+        0))
+
+;; 5 + 4 + 3 + 2 + 1 + 0 = 15
+(log (sum 5))
+```
+
+## point args & apply args
+
+``` scheme
+(define (add-all a . b)
+    (if (null? a)
+        0
+        (+ a (apply add-all b))))
+
+(log 
+    (add-all 1 2 3 4 5))
+;; 15
+```
+
+## cons
+
+``` scheme
+(define pair
+    (cons 1 2))
+
+(log (car pair))
+(log (cdr pair))
+```
+
+## list
+
+``` scheme
+(define (double x)
+    (+ x x))
+
+(define my-lst
+    (list 1 2 3 4))
+
+(log "for-each")
+(for-each log my-lst)
+
+(log "map")
+(for-each log 
+    (map double my-lst))
+```
+
+# What ? 
+
+1. [x] parse s-expression
+2. [x] define & lexical scope
+3. [x] lambda & closure invoke
+4. [x] recursive invoke
+5. [x] if statement control stream
+6. [x] variable length parameter
+7. [x] cons & list
 
 # Example
 

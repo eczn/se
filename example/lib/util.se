@@ -1,0 +1,2 @@
+(define (null? x) (= x null))
+
