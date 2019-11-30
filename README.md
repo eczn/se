@@ -97,7 +97,7 @@ $ se <file>
     (map double my-lst))
 ```
 
-# What ? 
+# Checklist 
 
 1. [x] parse s-expression
 2. [x] define & lexical scope
@@ -111,4 +111,6 @@ $ se <file>
 
 参见 [example](./example)
 
+# License
 
+MIT
