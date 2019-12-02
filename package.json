@@ -17,11 +17,13 @@
   "author": "desEczn",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.4.0",
     "string.prototype.padend": "^3.0.0",
     "string.prototype.padstart": "^3.0.0",
     "then-fs": "^2.0.0"
   },
   "devDependencies": {
+    "@types/colors": "^1.2.1",
     "@types/node": "^12.12.14",
     "typescript": "^3.7.2"
   }
