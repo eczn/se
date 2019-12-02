@@ -1,44 +1,73 @@
-interface Vars<T> {
-    [key: string]: T
-}
+import { rawParse } from "../parse";
 
-export class Scope<T = any> {
-    next: Scope<T> | null = null;
-    vars: Vars<T> = {};
+// old
+// type BuildInFunction = (
+//     nums: number[]
+// ) => number
 
-    find(key: string): T | null {
-        let { next, vars } = this; 
+type BuildInFunction = (
+    runner: (exp: string | RawExp, $: Scope) => any,
+    $: Scope,
+    restExp: RawExp,
+) => number | BuildInFunction
 
-        let target = vars[key]; 
-        
-        if (typeof target !== 'undefined') {
-            return target;
+export type ScopeVar = string | number | null | RawExp | BuildInFunction;
+
+export class Scope {
+    vars: {
+        [key: string]: ScopeVar
+    } = {};
+
+    outter: Scope | null = null;
+    
+    get(key: string): ScopeVar {
+        if (key[0] === '"') {
+            return key.slice(1, -1);
+        }
+
+        if (key === 'null') {
+            return null;
+        }
+
+        if (Number.isNaN(+key)) {
+            const target = this.vars[key];
+
+            if (typeof target === 'undefined' && this.outter) {
+                return this.outter.get(key);
+            } else {
+                return this.vars[key];
+            }
         } else {
-            return next ? next.find(key) : null; 
+            // key 本身是数字型的字符串
+            return + key
         }
     }
 
-    set(key: string, t: T) {
-        this.vars[key] = t;
+    extend() {
+        const newScope = new Scope();
+        newScope.outter = this;
+        return newScope;
     }
 
-    extend() {
-        const newScope = new Scope<T>();
-        newScope.next = this;
-        return newScope;
+    set(key: string, val: ScopeVar) {
+        if (typeof this.vars[key] !== 'undefined') throw new Error('重复声明变量 ' + key + val);
+
+        this.vars[key] = val;
     }
 
     log(deep = 0) {
         const tab = '  '.repeat(deep);
         Object.keys(this.vars).forEach(K => {
-            const t = typeof this.vars[K] === 'function' ? 'INNER_INJECTED' : JSON.stringify(this.vars[K]);
+            const value = this.vars[K];
+
+            const t = typeof value === 'function' ? (value.name || 'BUILDIN') : JSON.stringify(this.vars[K]);
             console.log(tab + K + ':', t);
         });
 
-        if (this.next) {
-            this.next.log(deep + 1);
+        if (this.outter) {
+            this.outter.log(deep + 1);
         }
     }
 }
 
-export * from './global-scope';
+export * from './global_scope';

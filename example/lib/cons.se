@@ -1,0 +1,14 @@
+;; cons
+(define (cons x y)
+    (lambda (m)
+        (m x y)))
+
+;; car
+(define (car pair)
+    (define (get-left  l r) l)
+    (pair get-left))
+
+;; cdr
+(define (cdr pair)
+    (define (get-right l r) r)
+    (pair get-right))
